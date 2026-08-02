@@ -84,12 +84,59 @@
       </div>
     </div>
 
-    <a
+    <button
       class="rsvp-button"
-      href="https://chat.whatsapp.com/DKleN9rFoNU6aKiByaQ5jc?s=cl&amp;p=a&amp;ilr=1"
-      target="_blank"
-      rel="noopener noreferrer"
-    >Confirmar asistencia</a>
+      id="open-rsvp"
+      type="button"
+    >Confirmar asistencia</button>
+
+    <div class="rsvp-modal" id="rsvp-modal" hidden>
+      <section
+        class="rsvp-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="rsvp-title"
+      >
+        <button class="modal-close" id="close-rsvp" type="button" aria-label="Cerrar formulario">×</button>
+
+        <div class="modal-ornament" aria-hidden="true">❧</div>
+        <h2 id="rsvp-title">Confirmar asistencia</h2>
+        <p class="modal-intro">Completá tus datos para confirmar que vas a acompañarnos.</p>
+
+        <form
+          class="rsvp-form"
+          id="rsvp-form"
+          method="post"
+          target="rsvp-response"
+          data-endpoint="https://script.google.com/macros/s/AKfycbx4xhGaHDvrUiDATNF2hd55Z1Hpofsn1Hg3Z2nEj38rsy_15rWVcXPWKNcajnnpRHrL/exec"
+        >
+          <label class="form-field" for="full-name">
+            <span>Nombre completo <b aria-hidden="true">*</b></span>
+            <input
+              id="full-name"
+              name="nombre_completo"
+              type="text"
+              autocomplete="name"
+              maxlength="100"
+              required
+            />
+          </label>
+
+          <label class="confirmation-check">
+            <input name="confirmacion" type="checkbox" value="si" required />
+            <span class="check-mark" aria-hidden="true">✓</span>
+            <span>Confirmo mi asistencia</span>
+          </label>
+
+          <button class="submit-rsvp" type="submit">Enviar confirmación</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="modal-ornament bottom" aria-hidden="true">❧</div>
+      </section>
+    </div>
+
+    <iframe class="rsvp-response" id="rsvp-response" name="rsvp-response" title="Respuesta del formulario"></iframe>
 
     <script src="script.js"></script>
   </body>

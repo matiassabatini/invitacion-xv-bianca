@@ -368,6 +368,8 @@ body.loading .bg-fixed {
   line-height: 1;
   text-decoration: none;
   white-space: nowrap;
+  cursor: pointer;
+  appearance: none;
   transition: opacity 360ms ease, transform 160ms ease, box-shadow 160ms ease;
 }
 
@@ -382,6 +384,212 @@ body.loading .bg-fixed {
 
 .rsvp-button:active {
   transform: translateX(-50%) translateY(0);
+}
+
+.rsvp-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(0, 0, 0, 0.76);
+  backdrop-filter: blur(3px);
+}
+
+.rsvp-modal[hidden] {
+  display: none;
+}
+
+.rsvp-dialog {
+  position: relative;
+  width: min(88vw, 440px);
+  padding: clamp(30px, 6vw, 44px) clamp(24px, 7vw, 48px);
+  color: #3b2a12;
+  text-align: center;
+  background:
+    linear-gradient(rgba(226, 177, 100, 0.2), rgba(181, 118, 50, 0.16)),
+    url('assets/fondo-papiro.png') center / cover no-repeat;
+  border: 1px solid rgba(85, 50, 16, 0.68);
+  border-radius: 6px;
+  box-shadow:
+    0 24px 65px rgba(0, 0, 0, 0.7),
+    inset 0 0 25px rgba(83, 45, 12, 0.2);
+  transform: translateY(14px) scale(0.97);
+  opacity: 0;
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+
+.rsvp-modal.is-open .rsvp-dialog {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  color: #3b2a12;
+  background: transparent;
+  font-family: Georgia, serif;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-close:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+}
+
+.modal-ornament {
+  font-family: Georgia, serif;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.modal-ornament.bottom {
+  margin-top: 10px;
+  transform: rotate(180deg);
+}
+
+.rsvp-dialog h2 {
+  margin-top: 4px;
+  font-family: 'Ms Madi', Georgia, serif;
+  font-size: clamp(38px, 9vw, 55px);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.modal-intro {
+  max-width: 310px;
+  margin: 9px auto 22px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.rsvp-form {
+  font-family: Georgia, 'Times New Roman', serif;
+  text-align: left;
+}
+
+.form-field > span {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.form-field b {
+  color: #7c250e;
+}
+
+.form-field input {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid rgba(59, 42, 18, 0.58);
+  border-radius: 4px;
+  color: #2d1e0c;
+  background: rgba(255, 239, 190, 0.48);
+  box-shadow: inset 0 2px 5px rgba(75, 41, 10, 0.13);
+  font: 600 16px/1.2 Georgia, 'Times New Roman', serif;
+}
+
+.form-field input:focus {
+  border-color: #5a3512;
+  outline: 2px solid rgba(90, 53, 18, 0.18);
+  outline-offset: 1px;
+}
+
+.confirmation-check {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 18px 0;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.confirmation-check input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.check-mark {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid #5a3512;
+  border-radius: 3px;
+  color: transparent;
+  background: rgba(255, 239, 190, 0.45);
+  font-size: 16px;
+}
+
+.confirmation-check input:checked + .check-mark {
+  color: #f5dfac;
+  background: #4b2d10;
+}
+
+.confirmation-check input:focus-visible + .check-mark {
+  outline: 2px solid rgba(90, 53, 18, 0.3);
+  outline-offset: 2px;
+}
+
+.submit-rsvp {
+  display: block;
+  width: 100%;
+  padding: 11px 18px 9px;
+  border: 1px solid rgba(245, 206, 128, 0.62);
+  border-radius: 999px;
+  color: #f5dfac;
+  background: linear-gradient(180deg, #5a3a19, #38220e);
+  box-shadow: 0 4px 10px rgba(45, 25, 6, 0.32);
+  font-family: 'Ms Madi', Georgia, serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.submit-rsvp:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.form-status {
+  min-height: 18px;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.form-status.success {
+  color: #24510f;
+}
+
+.form-status.error {
+  color: #7c250e;
+}
+
+.rsvp-response {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 @media (min-width: 700px) and (min-height: 650px) {
