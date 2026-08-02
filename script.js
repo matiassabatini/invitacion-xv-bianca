@@ -10,9 +10,9 @@ const rsvpForm = document.getElementById("rsvp-form");
 const fullName = document.getElementById("full-name");
 const formStatus = document.getElementById("form-status");
 const submitRsvp = rsvpForm.querySelector(".submit-rsvp");
-const rsvpResponse = document.getElementById("rsvp-response");
-let awaitingResponse = false;
-let responseTimer;
+const rsvpFormView = document.getElementById("rsvp-form-view");
+const rsvpSuccessView = document.getElementById("rsvp-success-view");
+const closeSuccess = document.getElementById("close-success");
 
 function finishLoading() {
   if (document.body.classList.contains("is-ready")) return;
@@ -71,6 +71,9 @@ function setFormStatus(message, type = "") {
 }
 
 function showRsvpModal() {
+  rsvpFormView.hidden = false;
+  rsvpSuccessView.hidden = true;
+  setFormStatus("");
   rsvpModal.hidden = false;
   requestAnimationFrame(() => rsvpModal.classList.add("is-open"));
   window.setTimeout(() => fullName.focus(), 230);
@@ -86,6 +89,7 @@ function hideRsvpModal() {
 
 openRsvp.addEventListener("click", showRsvpModal);
 closeRsvp.addEventListener("click", hideRsvpModal);
+closeSuccess.addEventListener("click", hideRsvpModal);
 
 rsvpModal.addEventListener("click", (event) => {
   if (event.target === rsvpModal) hideRsvpModal();
@@ -95,11 +99,11 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !rsvpModal.hidden) hideRsvpModal();
 });
 
-rsvpForm.addEventListener("submit", (event) => {
+rsvpForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
   fullName.value = fullName.value.trim();
 
   if (!fullName.value) {
-    event.preventDefault();
     fullName.setCustomValidity("Ingresá tu nombre completo.");
     fullName.reportValidity();
     return;
@@ -109,33 +113,38 @@ rsvpForm.addEventListener("submit", (event) => {
 
   const endpoint = rsvpForm.dataset.endpoint;
   if (!endpoint) {
-    event.preventDefault();
     setFormStatus("Falta conectar la URL de Google Sheets.", "error");
     return;
   }
 
-  rsvpForm.action = endpoint;
-  awaitingResponse = true;
   submitRsvp.disabled = true;
   setFormStatus("Enviando confirmación...");
 
-  clearTimeout(responseTimer);
-  responseTimer = window.setTimeout(() => {
-    if (!awaitingResponse) return;
-    awaitingResponse = false;
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      body: new FormData(rsvpForm),
+    });
+
+    if (!response.ok) throw new Error("Error de red");
+
+    const result = await response.json();
+    if (!result.ok) throw new Error(result.mensaje || "No se pudo guardar la confirmación.");
+
+    rsvpForm.reset();
+    rsvpModal.classList.remove("is-open");
+
+    window.setTimeout(() => {
+      rsvpFormView.hidden = true;
+      rsvpSuccessView.hidden = false;
+      rsvpModal.classList.add("is-open");
+      closeSuccess.focus();
+    }, 220);
+  } catch (error) {
+    setFormStatus(error.message || "No pudimos confirmar el envío. Intentá nuevamente.", "error");
+  } finally {
     submitRsvp.disabled = false;
-    setFormStatus("No pudimos confirmar el envío. Intentá nuevamente.", "error");
-  }, 12000);
+  }
 });
 
 fullName.addEventListener("input", () => fullName.setCustomValidity(""));
-
-rsvpResponse.addEventListener("load", () => {
-  if (!awaitingResponse) return;
-
-  awaitingResponse = false;
-  clearTimeout(responseTimer);
-  submitRsvp.disabled = false;
-  rsvpForm.reset();
-  setFormStatus("¡Gracias! Tu asistencia quedó confirmada.", "success");
-});

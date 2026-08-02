@@ -99,44 +99,51 @@
       >
         <button class="modal-close" id="close-rsvp" type="button" aria-label="Cerrar formulario">×</button>
 
-        <div class="modal-ornament" aria-hidden="true">❧</div>
-        <h2 id="rsvp-title">Confirmar asistencia</h2>
-        <p class="modal-intro">Completá tus datos para confirmar que vas a acompañarnos.</p>
+        <div class="rsvp-form-view" id="rsvp-form-view">
+          <div class="modal-ornament" aria-hidden="true">❧</div>
+          <h2 id="rsvp-title">Confirmar asistencia</h2>
+          <p class="modal-intro">Completá tus datos para confirmar que vas a acompañarnos.</p>
 
-        <form
-          class="rsvp-form"
-          id="rsvp-form"
-          method="post"
-          target="rsvp-response"
-          data-endpoint="https://script.google.com/macros/s/AKfycbx4xhGaHDvrUiDATNF2hd55Z1Hpofsn1Hg3Z2nEj38rsy_15rWVcXPWKNcajnnpRHrL/exec"
-        >
-          <label class="form-field" for="full-name">
-            <span>Nombre completo <b aria-hidden="true">*</b></span>
-            <input
-              id="full-name"
-              name="nombre_completo"
-              type="text"
-              autocomplete="name"
-              maxlength="100"
-              required
-            />
-          </label>
+          <form
+            class="rsvp-form"
+            id="rsvp-form"
+            method="post"
+            data-endpoint="https://script.google.com/macros/s/AKfycbx4xhGaHDvrUiDATNF2hd55Z1Hpofsn1Hg3Z2nEj38rsy_15rWVcXPWKNcajnnpRHrL/exec"
+          >
+            <label class="form-field" for="full-name">
+              <span>Nombre completo <b aria-hidden="true">*</b></span>
+              <input
+                id="full-name"
+                name="nombre_completo"
+                type="text"
+                autocomplete="name"
+                maxlength="100"
+                required
+              />
+            </label>
 
-          <label class="confirmation-check">
-            <input name="confirmacion" type="checkbox" value="si" required />
-            <span class="check-mark" aria-hidden="true">✓</span>
-            <span>Confirmo mi asistencia</span>
-          </label>
+            <label class="confirmation-check">
+              <input name="confirmacion" type="checkbox" value="si" required />
+              <span class="check-mark" aria-hidden="true">✓</span>
+              <span>Confirmo mi asistencia</span>
+            </label>
 
-          <button class="submit-rsvp" type="submit">Enviar confirmación</button>
-          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-        </form>
+            <button class="submit-rsvp" type="submit">Enviar confirmación</button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
 
-        <div class="modal-ornament bottom" aria-hidden="true">❧</div>
+          <div class="modal-ornament bottom" aria-hidden="true">❧</div>
+        </div>
+
+        <div class="rsvp-success-view" id="rsvp-success-view" hidden>
+          <div class="modal-ornament" aria-hidden="true">❧</div>
+          <h2>¡Gracias por confirmar!</h2>
+          <p>Nos vemos el <strong>26/09/2026</strong></p>
+          <button class="submit-rsvp close-success" id="close-success" type="button">Cerrar</button>
+          <div class="modal-ornament bottom" aria-hidden="true">❧</div>
+        </div>
       </section>
     </div>
-
-    <iframe class="rsvp-response" id="rsvp-response" name="rsvp-response" title="Respuesta del formulario"></iframe>
 
     <script src="script.js"></script>
   </body>

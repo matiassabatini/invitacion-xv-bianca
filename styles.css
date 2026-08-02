@@ -409,7 +409,7 @@ body.loading .bg-fixed {
   text-align: center;
   background:
     linear-gradient(rgba(226, 177, 100, 0.2), rgba(181, 118, 50, 0.16)),
-    url('assets/fondo-papiro.png') center / cover no-repeat;
+    url('assets/fondo-papiro.png') center / 200% auto no-repeat;
   border: 1px solid rgba(85, 50, 16, 0.68);
   border-radius: 6px;
   box-shadow:
@@ -583,13 +583,30 @@ body.loading .bg-fixed {
   color: #7c250e;
 }
 
-.rsvp-response {
-  position: fixed;
-  width: 1px;
-  height: 1px;
-  border: 0;
-  opacity: 0;
-  pointer-events: none;
+.rsvp-success-view[hidden] {
+  display: none;
+}
+
+.rsvp-success-view h2 {
+  margin-top: 8px;
+}
+
+.rsvp-success-view p {
+  margin: 20px 0 24px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.rsvp-success-view strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 21px;
+}
+
+.close-success {
+  max-width: 260px;
+  margin: 0 auto;
 }
 
 @media (min-width: 700px) and (min-height: 650px) {
