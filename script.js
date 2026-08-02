@@ -76,7 +76,6 @@ function showRsvpModal() {
   setFormStatus("");
   rsvpModal.hidden = false;
   requestAnimationFrame(() => rsvpModal.classList.add("is-open"));
-  window.setTimeout(() => fullName.focus(), 230);
 }
 
 function hideRsvpModal() {

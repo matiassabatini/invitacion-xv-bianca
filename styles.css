@@ -403,8 +403,8 @@ body.loading .bg-fixed {
 
 .rsvp-dialog {
   position: relative;
-  width: min(88vw, 440px);
-  padding: clamp(30px, 6vw, 44px) clamp(24px, 7vw, 48px);
+  width: min(74vw, 350px);
+  padding: clamp(32px, 7vw, 44px) clamp(24px, 7vw, 36px);
   color: #3b2a12;
   text-align: center;
   background:
@@ -459,28 +459,30 @@ body.loading .bg-fixed {
 .rsvp-dialog h2 {
   margin-top: 4px;
   font-family: 'Ms Madi', Georgia, serif;
-  font-size: clamp(38px, 9vw, 55px);
+  font-size: clamp(28px, 7vw, 40px);
   font-weight: 600;
   line-height: 1;
 }
 
 .modal-intro {
-  max-width: 310px;
-  margin: 9px auto 22px;
+  max-width: 225px;
+  margin: 8px auto 18px;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.4;
 }
 
 .rsvp-form {
+  width: min(100%, 230px);
+  margin: 0 auto;
   font-family: Georgia, 'Times New Roman', serif;
   text-align: left;
 }
 
 .form-field > span {
   display: block;
-  margin-bottom: 7px;
-  font-size: 14px;
+  margin-bottom: 6px;
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -490,7 +492,7 @@ body.loading .bg-fixed {
 
 .form-field input {
   width: 100%;
-  padding: 11px 12px;
+  padding: 9px 10px;
   border: 1px solid rgba(59, 42, 18, 0.58);
   border-radius: 4px;
   color: #2d1e0c;
@@ -509,8 +511,8 @@ body.loading .bg-fixed {
   display: flex;
   align-items: center;
   gap: 9px;
-  margin: 18px 0;
-  font-size: 14px;
+  margin: 15px 0;
+  font-size: 13px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -524,8 +526,8 @@ body.loading .bg-fixed {
 
 .check-mark {
   display: grid;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   flex: 0 0 auto;
   place-items: center;
   border: 1px solid #5a3512;
@@ -548,14 +550,14 @@ body.loading .bg-fixed {
 .submit-rsvp {
   display: block;
   width: 100%;
-  padding: 11px 18px 9px;
+  padding: 10px 15px 8px;
   border: 1px solid rgba(245, 206, 128, 0.62);
   border-radius: 999px;
   color: #f5dfac;
   background: linear-gradient(180deg, #5a3a19, #38220e);
   box-shadow: 0 4px 10px rgba(45, 25, 6, 0.32);
   font-family: 'Ms Madi', Georgia, serif;
-  font-size: 28px;
+  font-size: clamp(22px, 6vw, 26px);
   font-weight: 400;
   line-height: 1;
   cursor: pointer;
